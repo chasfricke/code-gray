@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components'
+import ResultsTable from './components/ResultsTable'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -40,6 +41,7 @@ function App() {
         <Header>
           <div>Charter/Spectrum Front-End Code Challenge</div>
         </Header>
+        <ResultsTable />
       </AppContainer>
     </>
   );
