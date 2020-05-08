@@ -4,6 +4,7 @@ function ResultsTable() {
   const [restaurants, setRestaurants] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(null);
+  const [search, setSearch] = useState('')
 
   const sortFunction = (arr) => {
     arr.sort((a, b) => {
@@ -38,29 +39,38 @@ function ResultsTable() {
       )
   }, [])
 
-
-
   if (error) {
     return <div>Error: {error.message}</div>;
   } else if (!isLoaded) {
     return <div>Loading...</div>;
   } else {
 
+    const filteredRestaurants = restaurants.filter(restaurant => {
+      //name, city, or genre
+      return (
+        restaurant.name.toLowerCase().includes(search.toLowerCase()) ||
+        restaurant.city.toLowerCase().includes(search.toLowerCase()) ||
+        restaurant.genre.toLowerCase().includes(search.toLowerCase())
+      )
+    })
 
     return (
-      <table>
-        <tbody>
-          {restaurants.map(item => (
-            <tr key={item.id}>
-              <td>{item.name}</td>
-              <td>{item.city}</td>
-              <td>{item.state}</td>
-              <td>{item.telephone}</td>
-              <td>{item.genre}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <>
+        <input type="text" placeholder="search" onChange={e => setSearch(e.target.value)} />
+        <table>
+          <tbody>
+            {filteredRestaurants.map(item => (
+              <tr key={item.id}>
+                <td>{item.name}</td>
+                <td>{item.city}</td>
+                <td>{item.state}</td>
+                <td>{item.telephone}</td>
+                <td>{item.genre}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </>
     );
   }
 }
