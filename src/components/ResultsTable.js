@@ -1,10 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
 
 function ResultsTable() {
   const [restaurants, setRestaurants] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(null);
+
+  const sortFunction = (arr) => {
+    arr.sort((a, b) => {
+      if (a.name[0] > b.name[0]) {
+        return 1
+      } else if (a.name[0] < b.name[0]) {
+        return -1
+      } else return 0
+    })
+    return arr
+  }
 
   useEffect(() => {
     const url = 'https://code-challenge.spectrumtoolbox.com/api/restaurants';
@@ -17,9 +27,8 @@ function ResultsTable() {
       })
       .then(res => res.json())
       .then(result => {
-        setRestaurants(result)
+        setRestaurants(sortFunction(result))
         setIsLoaded(true)
-        console.log(result)
       },
         (error) => {
           setIsLoaded(false)
@@ -29,11 +38,15 @@ function ResultsTable() {
       )
   }, [])
 
+
+
   if (error) {
     return <div>Error: {error.message}</div>;
   } else if (!isLoaded) {
     return <div>Loading...</div>;
   } else {
+
+
     return (
       <table>
         <tbody>
