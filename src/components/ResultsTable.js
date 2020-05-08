@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
-// import StateSelect from './StateSelect';
-import GenreSelect from './inputs/GenreSelect';
+import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+// import StateSelect from './StateSelect';
+import GenreSelect from './inputs/GenreSelect';
 
 function ResultsTable() {
   const [restaurants, setRestaurants] = useState([]);
@@ -69,17 +72,32 @@ function ResultsTable() {
 
     return (
       <>
-        <input type="text" placeholder="search" onChange={e => setSearch(e.target.value)} />
-        <Select onChange={e => setGenreSelect(e.target.value)}>
-          <MenuItem value="Steak">Steak</MenuItem>
-          <MenuItem value="Cafe">Cafe</MenuItem>
-        </Select>
-        <Select onChange={e => setStateSelect(e.target.value)}>
-          <MenuItem value="">SELECT ALL</MenuItem>
-          <MenuItem value="TX">Texas</MenuItem>
-          <MenuItem value="NY">New York</MenuItem>
-          <MenuItem value="FL">Florida</MenuItem>
-        </Select>
+        <TextField
+          label="Search"
+          variant="outlined"
+          onChange={e => setSearch(e.target.value)}
+        />
+        <FormControl>
+          <InputLabel>Genre</InputLabel>
+          <Select
+            onChange={e => setGenreSelect(e.target.value)}
+          >
+            <MenuItem value=""><em>All</em></MenuItem>
+            <MenuItem value="Steak">Steak</MenuItem>
+            <MenuItem value="Cafe">Cafe</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl>
+          <InputLabel>State</InputLabel>
+          <Select
+            onChange={e => setStateSelect(e.target.value)}
+          >
+            <MenuItem value=""><em>All</em></MenuItem>
+            <MenuItem value="TX">Texas</MenuItem>
+            <MenuItem value="NY">New York</MenuItem>
+            <MenuItem value="FL">Florida</MenuItem>
+          </Select>
+        </FormControl>
         {filteredRestaurants.length > 0 ? (
           <table>
             <tbody>
