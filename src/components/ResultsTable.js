@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+// import StateSelect from './StateSelect';
 
 function ResultsTable() {
   const [restaurants, setRestaurants] = useState([]);
@@ -6,6 +7,7 @@ function ResultsTable() {
   const [error, setError] = useState(null);
   const [search, setSearch] = useState('');
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+  const [stateSelect, setStateSelect] = useState('');
 
   const sortFunction = (arr) => {
     arr.sort((a, b) => {
@@ -43,12 +45,14 @@ function ResultsTable() {
   useEffect(() => {
     setFilteredRestaurants(restaurants.filter(restaurant => {
       return (
-        restaurant.name.toLowerCase().includes(search.toLowerCase()) ||
-        restaurant.city.toLowerCase().includes(search.toLowerCase()) ||
-        restaurant.genre.toLowerCase().includes(search.toLowerCase())
-      )
+        //Text Input
+        (restaurant.name.toLowerCase().includes(search.toLowerCase()) ||
+          restaurant.city.toLowerCase().includes(search.toLowerCase()) ||
+          restaurant.genre.toLowerCase().includes(search.toLowerCase())) &&
+        //State Select 
+        restaurant.state.toLowerCase().includes(stateSelect.toLowerCase()))
     }))
-  }, [search, restaurants])
+  }, [search, stateSelect, restaurants])
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -59,6 +63,12 @@ function ResultsTable() {
     return (
       <>
         <input type="text" placeholder="search" onChange={e => setSearch(e.target.value)} />
+        <select onChange={e => setStateSelect(e.target.value)}>
+          <option value="">SELECT ALL</option>
+          <option value="TX">Texas</option>
+          <option value="NY">New York</option>
+          <option value="FL">Florida</option>
+        </select>
         {filteredRestaurants.length > 0 ? (
           <table>
             <tbody>
