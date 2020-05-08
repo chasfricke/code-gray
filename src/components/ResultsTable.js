@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 // import StateSelect from './StateSelect';
+import GenreSelect from './inputs/GenreSelect';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
 function ResultsTable() {
   const [restaurants, setRestaurants] = useState([]);
@@ -8,6 +11,7 @@ function ResultsTable() {
   const [search, setSearch] = useState('');
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [stateSelect, setStateSelect] = useState('');
+  const [genreSelect, setGenreSelect] = useState('');
 
   const sortFunction = (arr) => {
     arr.sort((a, b) => {
@@ -50,9 +54,12 @@ function ResultsTable() {
           restaurant.city.toLowerCase().includes(search.toLowerCase()) ||
           restaurant.genre.toLowerCase().includes(search.toLowerCase())) &&
         //State Select 
-        restaurant.state.toLowerCase().includes(stateSelect.toLowerCase()))
+        restaurant.state.toLowerCase().includes(stateSelect.toLowerCase()) &&
+        //Genre Select
+        restaurant.genre.toLowerCase().includes(genreSelect.toLowerCase())
+      )
     }))
-  }, [search, stateSelect, restaurants])
+  }, [search, stateSelect, genreSelect, restaurants])
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -63,12 +70,16 @@ function ResultsTable() {
     return (
       <>
         <input type="text" placeholder="search" onChange={e => setSearch(e.target.value)} />
-        <select onChange={e => setStateSelect(e.target.value)}>
-          <option value="">SELECT ALL</option>
-          <option value="TX">Texas</option>
-          <option value="NY">New York</option>
-          <option value="FL">Florida</option>
-        </select>
+        <Select onChange={e => setGenreSelect(e.target.value)}>
+          <MenuItem value="Steak">Steak</MenuItem>
+          <MenuItem value="Cafe">Cafe</MenuItem>
+        </Select>
+        <Select onChange={e => setStateSelect(e.target.value)}>
+          <MenuItem value="">SELECT ALL</MenuItem>
+          <MenuItem value="TX">Texas</MenuItem>
+          <MenuItem value="NY">New York</MenuItem>
+          <MenuItem value="FL">Florida</MenuItem>
+        </Select>
         {filteredRestaurants.length > 0 ? (
           <table>
             <tbody>
