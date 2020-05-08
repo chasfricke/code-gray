@@ -1,6 +1,7 @@
 import React from 'react';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
+import PropTypes from 'prop-types';
+import { Select, MenuItem } from '@material-ui/core';
+
 
 export default function GenreSelect() {
   return (

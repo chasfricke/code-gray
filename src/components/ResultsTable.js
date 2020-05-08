@@ -4,8 +4,6 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
-// import StateSelect from './StateSelect';
-import GenreSelect from './inputs/GenreSelect';
 
 function ResultsTable() {
   const [restaurants, setRestaurants] = useState([]);
@@ -25,6 +23,10 @@ function ResultsTable() {
       } else return 0
     })
     return arr
+  }
+
+  const handleChange = event => {
+    setGenreSelect(event.target.value)
   }
 
   useEffect(() => {
@@ -87,6 +89,7 @@ function ResultsTable() {
             <MenuItem value="Cafe">Cafe</MenuItem>
           </Select>
         </FormControl>
+
         <FormControl>
           <InputLabel>State</InputLabel>
           <Select
