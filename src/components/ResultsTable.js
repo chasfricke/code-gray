@@ -59,19 +59,28 @@ function ResultsTable() {
     return (
       <>
         <input type="text" placeholder="search" onChange={e => setSearch(e.target.value)} />
-        <table>
-          <tbody>
-            {filteredRestaurants.map(item => (
-              <tr key={item.id}>
-                <td>{item.name}</td>
-                <td>{item.city}</td>
-                <td>{item.state}</td>
-                <td>{item.telephone}</td>
-                <td>{item.genre}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        {filteredRestaurants.length > 0 ? (
+          <table>
+            <tbody>
+              {filteredRestaurants.map(item => (
+                <tr key={item.id}>
+                  <td>{item.name}</td>
+                  <td>{item.city}</td>
+                  <td>{item.state}</td>
+                  <td>{item.telephone}</td>
+                  <td>{item.genre}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )
+          : (
+            <>
+              <div>No matches found were found.</div>
+              <div>Please refine your search.</div>
+            </>
+          )
+        }
       </>
     );
   }
