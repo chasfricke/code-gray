@@ -4,7 +4,8 @@ function ResultsTable() {
   const [restaurants, setRestaurants] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(null);
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState('');
+  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
   const sortFunction = (arr) => {
     arr.sort((a, b) => {
@@ -39,20 +40,21 @@ function ResultsTable() {
       )
   }, [])
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  } else if (!isLoaded) {
-    return <div>Loading...</div>;
-  } else {
-
-    const filteredRestaurants = restaurants.filter(restaurant => {
-      //name, city, or genre
+  useEffect(() => {
+    setFilteredRestaurants(restaurants.filter(restaurant => {
       return (
         restaurant.name.toLowerCase().includes(search.toLowerCase()) ||
         restaurant.city.toLowerCase().includes(search.toLowerCase()) ||
         restaurant.genre.toLowerCase().includes(search.toLowerCase())
       )
-    })
+    }))
+  }, [search, restaurants])
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  } else if (!isLoaded) {
+    return <div>Loading...</div>;
+  } else {
 
     return (
       <>
