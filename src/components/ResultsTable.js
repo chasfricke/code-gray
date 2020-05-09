@@ -33,6 +33,7 @@ function ResultsTable() {
       .then(res => res.json())
       .then(result => {
         setRestaurants(sortFunction(result))
+        setFilteredRestaurants(result)
         setIsLoaded(true)
       },
         (error) => {
