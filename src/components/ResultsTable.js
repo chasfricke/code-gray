@@ -83,6 +83,7 @@ function ResultsTable() {
         <FormControl>
           <InputLabel>Genre</InputLabel>
           <Select
+            value={genreSelect}
             onChange={e => setGenreSelect(e.target.value)}
           >
             <MenuItem value=""><em>All</em></MenuItem>
@@ -94,6 +95,7 @@ function ResultsTable() {
         <FormControl>
           <InputLabel>State</InputLabel>
           <Select
+            value={stateSelect}
             onChange={e => setStateSelect(e.target.value)}
           >
             <MenuItem value=""><em>All</em></MenuItem>

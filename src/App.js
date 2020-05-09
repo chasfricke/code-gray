@@ -1,5 +1,6 @@
 import React from 'react';
-import styled, { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from 'styled-components'
+import NavBar from './components/NavBar';
 import ResultsTable from './components/ResultsTable'
 
 const GlobalStyle = createGlobalStyle`
@@ -18,31 +19,12 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
-const AppContainer = styled.div`
-  text-align: center;
-`
-
-const Header = styled.header`
-  background-color: #282c34;
-  min-height: 100px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-`
-
 function App() {
   return (
     <>
       <GlobalStyle />
-      <AppContainer>
-        <Header>
-          <div>Charter/Spectrum Front-End Code Challenge</div>
-        </Header>
-        <ResultsTable />
-      </AppContainer>
+      <NavBar />
+      <ResultsTable />
     </>
   );
 }
