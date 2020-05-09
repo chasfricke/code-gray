@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import TextField from '@material-ui/core/TextField';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
+import { TextField, Select, MenuItem, FormControl, InputLabel, Button } from '@material-ui/core/';
 
 function ResultsTable() {
   const [restaurants, setRestaurants] = useState([]);
@@ -23,10 +19,6 @@ function ResultsTable() {
       } else return 0
     })
     return arr
-  }
-
-  const handleChange = event => {
-    setGenreSelect(event.target.value)
   }
 
   useEffect(() => {
@@ -51,7 +43,7 @@ function ResultsTable() {
       )
   }, [])
 
-  useEffect(() => {
+  const filteredSearch = () => {
     setFilteredRestaurants(restaurants.filter(restaurant => {
       return (
         //Text Input
@@ -64,7 +56,8 @@ function ResultsTable() {
         restaurant.genre.toLowerCase().includes(genreSelect.toLowerCase())
       )
     }))
-  }, [search, stateSelect, genreSelect, restaurants])
+
+  }
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -101,6 +94,7 @@ function ResultsTable() {
             <MenuItem value="FL">Florida</MenuItem>
           </Select>
         </FormControl>
+        <Button onClick={() => { filteredSearch() }} variant="contained" size="large">Search</Button>
         {filteredRestaurants.length > 0 ? (
           <table>
             <tbody>
