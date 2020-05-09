@@ -44,6 +44,12 @@ function ResultsTable() {
       )
   }, [])
 
+  const handleKeyDown = (e) => {
+    if (e.keyCode === 13) {
+      filteredSearch()
+    }
+  }
+
   const filteredSearch = () => {
     setFilteredRestaurants(restaurants.filter(restaurant => {
       return (
@@ -72,6 +78,7 @@ function ResultsTable() {
           label="Search"
           variant="outlined"
           onChange={e => setSearch(e.target.value)}
+          onKeyDown={handleKeyDown}
         />
         <FormControl>
           <InputLabel>Genre</InputLabel>
