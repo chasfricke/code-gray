@@ -1,17 +1,16 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Toolbar } from '@material-ui/core';
 
 const NavBar = () => {
   return (
     <div>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="title" color="inherit">
-            Code Gray - Charter/Spectrum Front-End Code Challenge
-          </Typography>
+          <h1>Code Gray</h1>
+          <h2>Charter/Spectrum Front-End Code Challenge</h2>
         </Toolbar>
       </AppBar>
-    </div>
+    </div >
   )
 }
 

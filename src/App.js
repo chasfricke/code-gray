@@ -3,6 +3,7 @@ import styled, { createGlobalStyle } from 'styled-components'
 import { TextField, Select, MenuItem, FormControl, InputLabel, Button } from '@material-ui/core/';
 import NavBar from './components/NavBar';
 import ResultsTable from './components/ResultsTable'
+import GenreSelect from './components/inputs/GenreSelect'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -20,7 +21,7 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
-const Body = styled.body`
+const Content = styled.div`
   padding: 16px;
   display: flex;
   flex-direction: column;
@@ -109,7 +110,7 @@ const App = () => {
     <>
       <GlobalStyle />
       <NavBar />
-      <Body>
+      <Content>
         <FilterContainer>
           <TextField
             label="Search"
@@ -117,17 +118,7 @@ const App = () => {
             onChange={e => setSearch(e.target.value)}
             onKeyDown={handleKeyDown}
           />
-          <FormControl>
-            <InputLabel>Genre</InputLabel>
-            <Select
-              value={genreSelect}
-              onChange={e => setGenreSelect(e.target.value)}
-            >
-              <MenuItem value=""><em>All</em></MenuItem>
-              <MenuItem value="Steak">Steak</MenuItem>
-              <MenuItem value="Cafe">Cafe</MenuItem>
-            </Select>
-          </FormControl>
+          <GenreSelect value={genreSelect} onChange={e => setGenreSelect(e.target.value)} data={restaurants} />
           <FormControl>
             <InputLabel>State</InputLabel>
             <Select
@@ -144,7 +135,7 @@ const App = () => {
         </FilterContainer>
         {isLoaded ? <ResultsTable data={filteredRestaurants} /> : <div>Searching for results...</div>}
         {error && <div>{error}</div>}
-      </Body>
+      </Content>
     </>
   );
 }
