@@ -1,5 +1,6 @@
 import React from 'react';
-import { Select, MenuItem, FormControl, InputLabel } from '@material-ui/core/';
+import { MenuItem } from '@material-ui/core/';
+import Select from './Select';
 
 const GenreSelect = (props) => {
 
@@ -16,17 +17,16 @@ const GenreSelect = (props) => {
   }
 
   return (
-    <FormControl>
-      <InputLabel>Genre</InputLabel>
-      <Select
-        value={props.value}
-        onChange={props.onChange}
-      >
-        {getGenres(props.data).map((x, index) => {
-          return <MenuItem key={index} value={x}>{x}</MenuItem>
-        })}
-      </Select>
-    </FormControl>
+    <Select
+      value={props.value}
+      onChange={props.onChange}
+      label="Genre"
+      showAllOption
+    >
+      {getGenres(props.data).map((x, index) => {
+        return <MenuItem key={index} value={x}>{x}</MenuItem>
+      })}
+    </Select>
   );
 }
 

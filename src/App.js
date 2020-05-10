@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styled, { createGlobalStyle } from 'styled-components'
-import { TextField, Select, MenuItem, FormControl, InputLabel, Button } from '@material-ui/core/';
+import { TextField, Button } from '@material-ui/core/';
 import NavBar from './components/NavBar';
 import ResultsTable from './components/ResultsTable'
 import GenreSelect from './components/inputs/GenreSelect'
+import StateSelect from './components/inputs/StateSelect'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -119,18 +120,7 @@ const App = () => {
             onKeyDown={handleKeyDown}
           />
           <GenreSelect value={genreSelect} onChange={e => setGenreSelect(e.target.value)} data={restaurants} />
-          <FormControl>
-            <InputLabel>State</InputLabel>
-            <Select
-              value={stateSelect}
-              onChange={e => setStateSelect(e.target.value)}
-            >
-              <MenuItem value=""><em>All</em></MenuItem>
-              <MenuItem value="TX">Texas</MenuItem>
-              <MenuItem value="NY">New York</MenuItem>
-              <MenuItem value="FL">Florida</MenuItem>
-            </Select>
-          </FormControl>
+          <StateSelect value={stateSelect} onChange={e => setStateSelect(e.target.value)} />
           <Button onClick={() => { filteredSearch() }} variant="contained" size="large">Search</Button>
         </FilterContainer>
         {isLoaded ? <ResultsTable data={filteredRestaurants} /> : <div>Searching for results...</div>}
