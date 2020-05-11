@@ -5,6 +5,7 @@ import NavBar from './components/NavBar';
 import ResultsTable from './components/ResultsTable'
 import GenreSelect from './components/inputs/GenreSelect'
 import StateSelect from './components/inputs/StateSelect'
+import Pagination from './components/Pagination'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -47,7 +48,7 @@ const App = () => {
   const [posts, setPosts] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(null);
-  const [postsPerPage, setPostsPerPage] = useState(10);
+  const [postsPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState('');
   const [filteredPosts, setFilteredPosts] = useState([]);
@@ -107,12 +108,17 @@ const App = () => {
         post.genre.toLowerCase().includes(genreSelect.toLowerCase())
       )
     }))
+    setCurrentPage(1)
   }
 
   // Pagination logic
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber)
+  }
 
   return (
     <>
@@ -131,6 +137,7 @@ const App = () => {
           <Button onClick={() => { filteredSearch() }} variant="contained" size="large">Search</Button>
         </FilterContainer>
         {isLoaded ? <ResultsTable data={currentPosts} /> : <div>Searching for results...</div>}
+        <Pagination postsPerPage={postsPerPage} totalPosts={filteredPosts.length} paginate={paginate} />
         {error && <div>{error}</div>}
       </Content>
     </>
