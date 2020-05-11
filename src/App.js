@@ -54,6 +54,7 @@ const App = () => {
   const [filteredPosts, setFilteredPosts] = useState([]);
   const [stateSelect, setStateSelect] = useState('');
   const [genreSelect, setGenreSelect] = useState('');
+  const [searchHelperText, setSearchHelperText] = useState('')
 
   useEffect(() => {
     const url = 'https://code-challenge.spectrumtoolbox.com/api/restaurants';
@@ -96,16 +97,38 @@ const App = () => {
   }
 
   const filteredSearch = () => {
+    if (searchHelperText) { setSearchHelperText('') }
+
+    const stateFilterResults = posts.filter(post => {
+      return post.state.toLowerCase().includes(stateSelect.toLowerCase())
+    })
+
+    if (stateFilterResults.length === 0) {
+      setSearchHelperText(`We're sorry.  We don't have any restaurants listed in ${stateSelect} at this time.`)
+    }
+
+    const searchBarCondition = (post) => (
+      post.name.toLowerCase().includes(search.toLowerCase()) ||
+      post.city.toLowerCase().includes(search.toLowerCase()) ||
+      post.genre.toLowerCase().includes(search.toLowerCase())
+    )
+
+    const stateSelectCondition = (post) => (
+      post.state.toLowerCase().includes(stateSelect.toLowerCase())
+    )
+
+    const genreSelectCondition = (post) => (
+      post.genre.toLowerCase().includes(genreSelect.toLowerCase())
+    )
+
     setFilteredPosts(posts.filter(post => {
       return (
         //Text Input
-        (post.name.toLowerCase().includes(search.toLowerCase()) ||
-          post.city.toLowerCase().includes(search.toLowerCase()) ||
-          post.genre.toLowerCase().includes(search.toLowerCase())) &&
+        searchBarCondition(post) &&
         //State Select 
-        post.state.toLowerCase().includes(stateSelect.toLowerCase()) &&
+        stateSelectCondition(post) &&
         //Genre Select
-        post.genre.toLowerCase().includes(genreSelect.toLowerCase())
+        genreSelectCondition(post)
       )
     }))
     setCurrentPage(1)
@@ -136,8 +159,13 @@ const App = () => {
           <StateSelect value={stateSelect} onChange={e => setStateSelect(e.target.value)} />
           <Button onClick={() => { filteredSearch() }} variant="contained" size="large">Search</Button>
         </FilterContainer>
-        {isLoaded ? <ResultsTable data={currentPosts} /> : <div>Searching for results...</div>}
-        <Pagination postsPerPage={postsPerPage} totalPosts={filteredPosts.length} paginate={paginate} currentPage={currentPage} />
+        {isLoaded ? <ResultsTable data={currentPosts} searchHelperText={searchHelperText} state={stateSelect} /> : <div>Searching for results...</div>}
+        <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={filteredPosts.length}
+          paginate={paginate}
+          currentPage={currentPage}
+        />
         {error && <div>{error}</div>}
       </Content>
     </>
