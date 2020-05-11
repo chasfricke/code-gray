@@ -44,11 +44,11 @@ border-radius: 4px;
 `
 
 const App = () => {
-  const [restaurants, setRestaurants] = useState([]);
+  const [posts, setPosts] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(null);
   const [search, setSearch] = useState('');
-  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+  const [filteredPosts, setFilteredPosts] = useState([]);
   const [stateSelect, setStateSelect] = useState('');
   const [genreSelect, setGenreSelect] = useState('');
 
@@ -63,8 +63,8 @@ const App = () => {
       })
       .then(res => res.json())
       .then(result => {
-        setRestaurants(sortFunction(result))
-        setFilteredRestaurants(result)
+        setPosts(sortFunction(result))
+        setFilteredPosts(result)
         setIsLoaded(true)
       },
         (error) => {
@@ -93,16 +93,16 @@ const App = () => {
   }
 
   const filteredSearch = () => {
-    setFilteredRestaurants(restaurants.filter(restaurant => {
+    setFilteredPosts(posts.filter(post => {
       return (
         //Text Input
-        (restaurant.name.toLowerCase().includes(search.toLowerCase()) ||
-          restaurant.city.toLowerCase().includes(search.toLowerCase()) ||
-          restaurant.genre.toLowerCase().includes(search.toLowerCase())) &&
+        (post.name.toLowerCase().includes(search.toLowerCase()) ||
+          post.city.toLowerCase().includes(search.toLowerCase()) ||
+          post.genre.toLowerCase().includes(search.toLowerCase())) &&
         //State Select 
-        restaurant.state.toLowerCase().includes(stateSelect.toLowerCase()) &&
+        post.state.toLowerCase().includes(stateSelect.toLowerCase()) &&
         //Genre Select
-        restaurant.genre.toLowerCase().includes(genreSelect.toLowerCase())
+        post.genre.toLowerCase().includes(genreSelect.toLowerCase())
       )
     }))
   }
@@ -119,11 +119,11 @@ const App = () => {
             onChange={e => setSearch(e.target.value)}
             onKeyDown={handleKeyDown}
           />
-          <GenreSelect value={genreSelect} onChange={e => setGenreSelect(e.target.value)} data={restaurants} />
+          <GenreSelect value={genreSelect} onChange={e => setGenreSelect(e.target.value)} data={posts} />
           <StateSelect value={stateSelect} onChange={e => setStateSelect(e.target.value)} />
           <Button onClick={() => { filteredSearch() }} variant="contained" size="large">Search</Button>
         </FilterContainer>
-        {isLoaded ? <ResultsTable data={filteredRestaurants} /> : <div>Searching for results...</div>}
+        {isLoaded ? <ResultsTable data={filteredPosts} /> : <div>Searching for results...</div>}
         {error && <div>{error}</div>}
       </Content>
     </>
