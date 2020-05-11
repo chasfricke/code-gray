@@ -137,7 +137,7 @@ const App = () => {
           <Button onClick={() => { filteredSearch() }} variant="contained" size="large">Search</Button>
         </FilterContainer>
         {isLoaded ? <ResultsTable data={currentPosts} /> : <div>Searching for results...</div>}
-        <Pagination postsPerPage={postsPerPage} totalPosts={filteredPosts.length} paginate={paginate} />
+        <Pagination postsPerPage={postsPerPage} totalPosts={filteredPosts.length} paginate={paginate} currentPage={currentPage} />
         {error && <div>{error}</div>}
       </Content>
     </>
