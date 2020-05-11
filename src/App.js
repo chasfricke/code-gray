@@ -47,6 +47,8 @@ const App = () => {
   const [posts, setPosts] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(null);
+  const [postsPerPage, setPostsPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState('');
   const [filteredPosts, setFilteredPosts] = useState([]);
   const [stateSelect, setStateSelect] = useState('');
@@ -73,7 +75,7 @@ const App = () => {
           console.log(error)
         }
       )
-  }, [])
+  }, []);
 
   const sortFunction = (arr) => {
     arr.sort((a, b) => {
@@ -107,6 +109,11 @@ const App = () => {
     }))
   }
 
+  // Pagination logic
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
+
   return (
     <>
       <GlobalStyle />
@@ -123,7 +130,7 @@ const App = () => {
           <StateSelect value={stateSelect} onChange={e => setStateSelect(e.target.value)} />
           <Button onClick={() => { filteredSearch() }} variant="contained" size="large">Search</Button>
         </FilterContainer>
-        {isLoaded ? <ResultsTable data={filteredPosts} /> : <div>Searching for results...</div>}
+        {isLoaded ? <ResultsTable data={currentPosts} /> : <div>Searching for results...</div>}
         {error && <div>{error}</div>}
       </Content>
     </>
