@@ -156,7 +156,7 @@ const App = () => {
             onKeyDown={handleKeyDown}
           />
           <GenreSelect value={genreSelect} onChange={e => setGenreSelect(e.target.value)} data={posts} />
-          <StateSelect value={stateSelect} onChange={e => setStateSelect(e.target.value)} />
+          <StateSelect value={stateSelect} onChange={e => setStateSelect(e.target.value)} data={posts} />
           <Button onClick={() => { filteredSearch() }} variant="contained" size="large">Search</Button>
         </FilterContainer>
         {isLoaded ? <ResultsTable data={currentPosts} searchHelperText={searchHelperText} state={stateSelect} /> : <div>Searching for results...</div>}

@@ -1,19 +1,15 @@
 import React from 'react';
 import { MenuItem, FormControl, InputLabel } from '@material-ui/core/';
 import MuiSelect from '@material-ui/core/Select';
-// import { WithStyles } from '@material-ui/core/styles'
+import styled from 'styled-components'
 
-// const StyledSelect = withStyles({
-//   root: {
-//     minWidth: '180px'
-//   }
-// })
-
-//ToDo: add PropTypes validation and defaultProps
+const StyledFormControl = styled(FormControl)`
+  width: 150px;
+`
 
 const Select = (props) => {
   return (
-    <FormControl>
+    <StyledFormControl>
       <InputLabel>{props.label}</InputLabel>
       <MuiSelect
         value={props.value}
@@ -23,7 +19,7 @@ const Select = (props) => {
         {props.children}
       </MuiSelect>
 
-    </FormControl>
+    </StyledFormControl>
 
   );
 }
