@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled, { createGlobalStyle } from 'styled-components'
 import { TextField, Button } from '@material-ui/core/';
 import NavBar from './components/NavBar';
-import ResultsTable from './components/ResultsTable'
+import PostsTable from './components/PostsTable'
 import GenreSelect from './components/inputs/GenreSelect'
 import StateSelect from './components/inputs/StateSelect'
 import Pagination from './components/Pagination'
@@ -97,7 +97,7 @@ const App = () => {
   }
 
   const filteredSearch = () => {
-    if (searchHelperText) { setSearchHelperText('') }
+    setSearchHelperText('')
 
     const stateFilterResults = posts.filter(post => {
       return post.state.toLowerCase().includes(stateSelect.toLowerCase())
@@ -116,6 +116,15 @@ const App = () => {
     const stateSelectCondition = (post) => (
       post.state.toLowerCase().includes(stateSelect.toLowerCase())
     )
+
+    // To Do: Ignore 'ALL' value when selected 
+    // const stateSelectCondition = (post) => {
+    //   if (stateSelect === "ALL") {
+    //     return true
+    //   } else {
+    //     return post.state.toLowerCase().includes(stateSelect.toLowerCase())
+    //   }
+    // }
 
     const genreSelectCondition = (post) => (
       post.genre.toLowerCase().includes(genreSelect.toLowerCase())
@@ -159,7 +168,7 @@ const App = () => {
           <StateSelect value={stateSelect} onChange={e => setStateSelect(e.target.value)} data={posts} />
           <Button onClick={() => { filteredSearch() }} variant="contained" size="large">Search</Button>
         </FilterContainer>
-        {isLoaded ? <ResultsTable data={currentPosts} searchHelperText={searchHelperText} state={stateSelect} /> : <div>Searching for results...</div>}
+        {isLoaded ? <PostsTable data={currentPosts} searchHelperText={searchHelperText} state={stateSelect} /> : <div>Searching for results...</div>}
         <Pagination
           postsPerPage={postsPerPage}
           totalPosts={filteredPosts.length}

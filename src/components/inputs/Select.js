@@ -15,7 +15,7 @@ const Select = (props) => {
         value={props.value}
         onChange={props.onChange}
       >
-        {props.showAllOption && <MenuItem value=""><em>ALL</em></MenuItem>}
+        {props.showAllOption && <MenuItem value="ALL"><em>ALL</em></MenuItem>}
         {props.children}
       </MuiSelect>
 
