@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import styled, { createGlobalStyle } from 'styled-components'
-import Paper from '@material-ui/core/Paper';
 import NavBar from './components/NavBar';
 import PostsTable from './components/PostsTable'
-import GenreSelect from './components/inputs/GenreSelect'
-import StateSelect from './components/inputs/StateSelect'
-import TextField from './components/inputs/TextField'
-import Button from './components/inputs/Button'
 import Pagination from './components/Pagination'
+import FilterBar from './components/FilterBar'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -34,41 +30,14 @@ const Content = styled.div`
   align-items: center;
 `
 
-const FilterContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  padding: 16px;
-  background-color: white;
-  position: fixed;
-  top: 100px;
-  width: 100%;
-`
-
-const FilterContent = styled(Paper)`
-  && {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    background: #dadada;
-    width: 100%;
-    max-width: 800px;
-    padding: 16px;
-    border-radius: 4px;
-  }
-`
-
 const App = () => {
   const [posts, setPosts] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(null);
   const [postsPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
-  const [search, setSearch] = useState('');
   const [filteredPosts, setFilteredPosts] = useState([]);
-  const [stateSelect, setStateSelect] = useState('ALL');
-  const [genreSelect, setGenreSelect] = useState('ALL');
-  const [searchHelperText, setSearchHelperText] = useState('')
+
 
   useEffect(() => {
     const url = 'https://code-challenge.spectrumtoolbox.com/api/restaurants';
@@ -104,63 +73,6 @@ const App = () => {
     return arr
   }
 
-  const handleKeyDown = (e) => {
-    if (e.keyCode === 13) {
-      filteredSearch()
-    }
-  }
-
-  const filteredSearch = () => {
-    setSearchHelperText('')
-
-    const filterByState = () => {
-      let result = posts;
-      if (stateSelect !== "ALL") {
-        result = posts.filter(post => (
-          (post.state.toLowerCase().includes(stateSelect.toLowerCase()))
-        ))
-      }
-      if (result.length > 0) {
-        filterByGenre(result)
-      } else {
-        return (setSearchHelperText(`${stateSelect} has no restaurant listings.`), setFilteredPosts([]))
-      }
-    }
-
-    const filterByGenre = (stateData) => {
-      let result = stateData;
-      if (genreSelect !== "ALL") {
-        result = stateData.filter(post => (
-          post.genre.toLowerCase().includes(genreSelect.toLowerCase())
-        ))
-      }
-      if (result.length > 0) {
-        filterBySearchBar(result)
-      } else {
-        return (
-          setSearchHelperText(`${stateSelect} has no restaurant listings with the genre "${genreSelect}".`)
-          , setFilteredPosts([])
-        )
-      }
-    }
-
-    const filterBySearchBar = (genreData) => {
-      const result = genreData.filter(post => (
-        post.name.toLowerCase().includes(search.toLowerCase()) ||
-        post.city.toLowerCase().includes(search.toLowerCase()) ||
-        post.genre.toLowerCase().includes(search.toLowerCase())
-      ))
-      if (result.length === 0) {
-        return (setSearchHelperText(`No restaurant listings ${stateSelect && `in ${stateSelect}`} include "${search}".  Please broaden your search.`),
-          setFilteredPosts([])
-        )
-      }
-      return setFilteredPosts(result)
-    }
-    filterByState()
-    setCurrentPage(1)
-  }
-
   // Pagination logic
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -175,19 +87,8 @@ const App = () => {
       <GlobalStyle />
       <NavBar />
       <Content>
-        <FilterContainer>
-          <FilterContent>
-            <TextField
-              label="Search"
-              onChange={e => setSearch(e.target.value)}
-              onKeyDown={handleKeyDown}
-            />
-            <GenreSelect value={genreSelect} onChange={e => setGenreSelect(e.target.value)} data={posts} />
-            <StateSelect value={stateSelect} onChange={e => setStateSelect(e.target.value)} data={posts} />
-            <Button onClick={() => { filteredSearch() }}>Search</Button>
-          </FilterContent>
-        </FilterContainer>
-        {isLoaded ? <PostsTable data={currentPosts} searchHelperText={searchHelperText} /> : <div>Searching for results...</div>}
+        <FilterBar posts={posts} setFilteredPosts={setFilteredPosts} setCurrentPage={setCurrentPage} />
+        {isLoaded ? <PostsTable data={currentPosts} /> : <div>Searching for results...</div>}
         <Pagination
           postsPerPage={postsPerPage}
           totalPosts={filteredPosts.length}
