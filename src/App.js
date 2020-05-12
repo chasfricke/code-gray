@@ -87,13 +87,15 @@ const App = () => {
       <GlobalStyle />
       <NavBar />
       <Content>
-        <FilterBar posts={posts} setFilteredPosts={setFilteredPosts} setCurrentPage={setCurrentPage} />
-        {isLoaded ? <PostsTable data={currentPosts} /> : <div>Searching for results...</div>}
+
+        <FilterBar posts={posts} setFilteredPosts={setFilteredPosts} setCurrentPage={setCurrentPage} setIsLoaded={setIsLoaded} />
+        {isLoaded ? <PostsTable currentPosts={currentPosts} /> : <div>Searching...</div>}
         <Pagination
           postsPerPage={postsPerPage}
           totalPosts={filteredPosts.length}
           paginate={paginate}
           currentPage={currentPage}
+          isLoaded={isLoaded}
         />
         {error && <div>{error}</div>}
       </Content>

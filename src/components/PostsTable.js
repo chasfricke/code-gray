@@ -35,7 +35,7 @@ const StyledUL = styled.ul`
   }
 `
 
-const ResultsTable = (props) => {
+const ResultsTable = ({ currentPosts }) => {
   const getGenreList = (genreStr) => {
     const genreArr = genreStr.split(',')
     return (
@@ -50,19 +50,18 @@ const ResultsTable = (props) => {
   return (
     <table>
       <tbody>
-        {props.data.map(item => (
+        {currentPosts.map(item => (
           <tr key={item.id}>
             <StyledTD>
               <NameText>{item.name}</NameText>
               <IconRow><CallIcon fontSize="small" /><a href="tel:{item.telephone}">{item.telephone}</a></IconRow>
               <IconRow><LocationOnIcon fontSize="small" /><p>{item.city}, {item.state}</p></IconRow>
             </StyledTD>
-
             <td>{getGenreList(item.genre)}</td>
           </tr>
         ))}
-      </tbody>
-    </table>
+      </tbody >
+    </table >
   );
 }
 
