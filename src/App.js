@@ -41,7 +41,7 @@ background: #dadada;
 width: 100%;
 max-width: 800px;
 padding: 16px;
-margin: 6px 0 16px 0;
+margin: 100px 0 16px 0;
 border-radius: 4px;
 `
 
