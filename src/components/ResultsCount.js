@@ -1,4 +1,9 @@
 import React from 'react'
+import styled from 'styled-components'
+
+const CountText = styled.p`
+  margin: 0;
+`
 
 const ResultsCount = ({ indexOfFirstPost, indexOfLastPost, total }) => {
   let message;
@@ -8,7 +13,7 @@ const ResultsCount = ({ indexOfFirstPost, indexOfLastPost, total }) => {
   } else {
     message = `${indexOfFirstPost + 1} - ${indexOfLastPost} of ${total}`
   }
-  return <p>{message}</p>
+  return <CountText>{message}</CountText>
 }
 
 export default ResultsCount;
