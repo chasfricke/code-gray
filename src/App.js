@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styled, { createGlobalStyle } from 'styled-components'
-import { TextField, Button } from '@material-ui/core/';
 import NavBar from './components/NavBar';
 import PostsTable from './components/PostsTable'
 import GenreSelect from './components/inputs/GenreSelect'
 import StateSelect from './components/inputs/StateSelect'
+import TextField from './components/inputs/TextField'
+import Button from './components/inputs/Button'
 import Pagination from './components/Pagination'
 
 const GlobalStyle = createGlobalStyle`
@@ -159,13 +160,12 @@ const App = () => {
         <FilterContainer>
           <TextField
             label="Search"
-            variant="outlined"
             onChange={e => setSearch(e.target.value)}
             onKeyDown={handleKeyDown}
           />
           <GenreSelect value={genreSelect} onChange={e => setGenreSelect(e.target.value)} data={posts} />
           <StateSelect value={stateSelect} onChange={e => setStateSelect(e.target.value)} data={posts} />
-          <Button onClick={() => { filteredSearch() }} variant="contained" size="large">Search</Button>
+          <Button onClick={() => { filteredSearch() }}>Search</Button>
         </FilterContainer>
         {isLoaded ? <PostsTable data={currentPosts} searchHelperText={searchHelperText} /> : <div>Searching for results...</div>}
         <Pagination
