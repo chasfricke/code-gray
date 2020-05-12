@@ -123,7 +123,7 @@ const App = () => {
       if (result.length > 0) {
         filterByGenre(result)
       } else {
-        return setSearchHelperText(`${stateSelect} has no restaurant listings.`)
+        return (setSearchHelperText(`${stateSelect} has no restaurant listings.`), setFilteredPosts([]))
       }
     }
 
@@ -137,7 +137,10 @@ const App = () => {
       if (result.length > 0) {
         filterBySearchBar(result)
       } else {
-        return setSearchHelperText(`${stateSelect} has no restaurant listings with the genre "${genreSelect}".`)
+        return (
+          setSearchHelperText(`${stateSelect} has no restaurant listings with the genre "${genreSelect}".`)
+          , setFilteredPosts([])
+        )
       }
     }
 
@@ -148,7 +151,9 @@ const App = () => {
         post.genre.toLowerCase().includes(search.toLowerCase())
       ))
       if (result.length === 0) {
-        return setSearchHelperText(`No restaurant listings ${stateSelect && `in ${stateSelect}`} include "${search}".  Please broaden your search.`)
+        return (setSearchHelperText(`No restaurant listings ${stateSelect && `in ${stateSelect}`} include "${search}".  Please broaden your search.`),
+          setFilteredPosts([])
+        )
       }
       return setFilteredPosts(result)
     }
