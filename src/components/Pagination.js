@@ -2,9 +2,10 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 const StyledUl = styled.ul`
-  margin-top: 36px;
+  margin: 24px 0 24px 0;
   display: flex;
   flex-direction: row;
+  padding-inline-start: 0;
 `
 
 const PageButton = styled.li`
@@ -12,11 +13,13 @@ const PageButton = styled.li`
   width: 36px;
   height: 36px;
   border: solid 1px gray;
+  border-radius: 4px;
   list-style: none;
+  margin: 2px;
 `
 
 const StyledAnchor = styled.a`
-display: flex;
+  display: flex;
   flex-direction: row;
   justify-content: center;
   align-content: center;

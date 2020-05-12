@@ -52,8 +52,8 @@ const App = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState('');
   const [filteredPosts, setFilteredPosts] = useState([]);
-  const [stateSelect, setStateSelect] = useState('');
-  const [genreSelect, setGenreSelect] = useState('');
+  const [stateSelect, setStateSelect] = useState('ALL');
+  const [genreSelect, setGenreSelect] = useState('ALL');
   const [searchHelperText, setSearchHelperText] = useState('')
 
   useEffect(() => {
@@ -139,6 +139,7 @@ const App = () => {
       return setFilteredPosts(result)
     }
     filterByState()
+    setCurrentPage(1)
   }
 
   // Pagination logic
