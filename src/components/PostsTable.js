@@ -25,14 +25,14 @@ const StyledUL = styled.ul`
   list-style: none;
   color: rgba(0,0,0,0.87);
   padding-inline-start: 0;
-  margin: 0;
+  margin: -3px 0 0 0;
   li {
     margin: 3px 0;
   }
 `
 
 const StyledTD = styled.td`
-  width: 300px;
+  width: 250px;
   padding: 16px 0 16px 0;
   vertical-align: top;
 `
@@ -58,6 +58,13 @@ const ResultsTable = ({ currentPosts }) => {
 
   return (
     <table>
+      <thead>
+        <tr>
+          <th>General Info</th>
+          <th>Genre</th>
+          <th>Attire</th>
+        </tr>
+      </thead>
       <tbody>
         {currentPosts.map(item => (
           <tr key={item.id}>

@@ -4,11 +4,15 @@ import Select from './Select';
 
 const AttireSelect = (props) => {
 
+  const capitalize = (currentValue) => {
+    return currentValue.charAt(0).toUpperCase() + currentValue.slice(1);
+  }
+
   const getAttire = arr => {
     let attires = []
     arr.forEach(x => {
-      if (!attires.includes(x.attire)) {
-        attires.push(x.attire)
+      if (!attires.includes(capitalize(x.attire))) {
+        attires.push(capitalize(x.attire))
       }
     })
     return attires.sort();
@@ -21,8 +25,8 @@ const AttireSelect = (props) => {
       label="Attire"
       showAllOption
     >
-      {getAttire(props.data).map((x, index) => {
-        return <MenuItem key={index} value={x}>{x.charAt(0).toUpperCase() + x.slice(1)}</MenuItem>
+      {getAttire(props.data).map((y, index) => {
+        return <MenuItem key={index} value={y}>{capitalize(y)}</MenuItem>
       })}
     </Select>
   );
