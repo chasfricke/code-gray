@@ -89,7 +89,16 @@ const App = () => {
       <NavBar />
       <Content>
 
-        <FilterBar posts={posts} setFilteredPosts={setFilteredPosts} setCurrentPage={setCurrentPage} setIsLoaded={setIsLoaded} />
+        <FilterBar
+          posts={posts}
+          setFilteredPosts={setFilteredPosts}
+          setCurrentPage={setCurrentPage}
+          setIsLoaded={setIsLoaded}
+          indexOfFirstPost={indexOfFirstPost}
+          indexOfLastPost={indexOfLastPost}
+          total={filteredPosts.length}
+          isLoaded={isLoaded}
+        />
         {isLoaded ? <PostsTable currentPosts={currentPosts} /> : <CircularProgress />}
         <Pagination
           postsPerPage={postsPerPage}
