@@ -7,12 +7,9 @@ const AttireSelect = (props) => {
   const getAttire = arr => {
     let attires = []
     arr.forEach(x => {
-      x.attire.split(',').forEach(y => {
-        y = y.charAt(0).toUpperCase() + y.slice(1)
-        if (!attires.includes(y)) {
-          attires.push(y)
-        }
-      })
+      if (!attires.includes(x.attire)) {
+        attires.push(x.attire)
+      }
     })
     return attires.sort();
   }
@@ -25,7 +22,7 @@ const AttireSelect = (props) => {
       showAllOption
     >
       {getAttire(props.data).map((x, index) => {
-        return <MenuItem key={index} value={x}>{x}</MenuItem>
+        return <MenuItem key={index} value={x}>{x.charAt(0).toUpperCase() + x.slice(1)}</MenuItem>
       })}
     </Select>
   );

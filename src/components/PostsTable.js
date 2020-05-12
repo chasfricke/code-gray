@@ -3,11 +3,6 @@ import styled from 'styled-components';
 import CallIcon from '@material-ui/icons/Call';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 
-const StyledTD = styled.td`
-  width: 325px;
-  padding: 16px 0 16px 0;
-`
-
 const NameText = styled.h3`
   font-size: 26px;
   font-weight: bold;
@@ -30,9 +25,23 @@ const StyledUL = styled.ul`
   list-style: none;
   color: rgba(0,0,0,0.87);
   padding-inline-start: 0;
+  margin: 0;
   li {
-    margin: 2px 0;
+    margin: 3px 0;
   }
+`
+
+const StyledTD = styled.td`
+  width: 300px;
+  padding: 16px 0 16px 0;
+  vertical-align: top;
+`
+
+const StyledTd = styled.td`
+    padding:  18px;
+    // background-color: blue;
+    min-width: 100px;
+    vertical-align: top;
 `
 
 const ResultsTable = ({ currentPosts }) => {
@@ -57,7 +66,8 @@ const ResultsTable = ({ currentPosts }) => {
               <IconRow><CallIcon fontSize="small" /><a href="tel:{item.telephone}">{item.telephone}</a></IconRow>
               <IconRow><LocationOnIcon fontSize="small" /><p>{item.city}, {item.state}</p></IconRow>
             </StyledTD>
-            <td>{getGenreList(item.genre)}</td>
+            <StyledTd>{getGenreList(item.genre)}</StyledTd>
+            <StyledTd>{item.attire.charAt(0).toUpperCase() + item.attire.slice(1)}</StyledTd>
           </tr>
         ))}
       </tbody >

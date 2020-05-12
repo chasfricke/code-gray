@@ -55,10 +55,27 @@ const FilterBar = ({ posts, setFilteredPosts, setCurrentPage, setIsLoaded, index
         ))
       }
       if (result.length > 0) {
-        filterBySearchBar(result)
+        filterByAttire(result)
       } else {
         return (
           setSearchHelperText(`${stateSelect} has no restaurant listings with the genre "${genreSelect}".`)
+          , setFilteredPosts([])
+        )
+      }
+    }
+
+    const filterByAttire = (genreData) => {
+      let result = genreData;
+      if (attireSelect !== "ALL") {
+        result = genreData.filter(post => (
+          post.attire.toLowerCase().includes(attireSelect.toLowerCase()) && post.attire.length === attireSelect.length
+        ))
+      }
+      if (result.length > 0) {
+        filterBySearchBar(result)
+      } else {
+        return (
+          setSearchHelperText(`${stateSelect} has no restaurant listings with the genre "${genreSelect}" and "${attireSelect}" attire.`)
           , setFilteredPosts([])
         )
       }
@@ -97,7 +114,7 @@ const FilterBar = ({ posts, setFilteredPosts, setCurrentPage, setIsLoaded, index
         />
         <StateSelect value={stateSelect} onChange={e => setStateSelect(e.target.value)} data={posts} />
         <GenreSelect value={genreSelect} onChange={e => setGenreSelect(e.target.value)} data={posts} />
-        <AttireSelect value={attireSelect} onChange={e => setStateSelect(e.target.value)} data={posts} />
+        <AttireSelect value={attireSelect} onChange={e => setAttireSelect(e.target.value)} data={posts} />
         <Button onClick={() => { filteredSearch() }}>Search</Button>
       </FilterContainer>
       <p>{isLoaded && (searchHelperText ? searchHelperText : <ResultsCount indexOfFirstPost={indexOfFirstPost} indexOfLastPost={indexOfLastPost} total={total} />)}</p>
