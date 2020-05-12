@@ -20,7 +20,7 @@ const FilterContainer = styled(Paper)`
   }
 `
 
-const FilterBar = ({ posts, setFilteredPosts, setCurrentPage }) => {
+const FilterBar = ({ posts, setFilteredPosts, setCurrentPage, setIsLoaded }) => {
   const [stateSelect, setStateSelect] = useState('ALL');
   const [genreSelect, setGenreSelect] = useState('ALL');
   const [searchHelperText, setSearchHelperText] = useState('')
@@ -30,6 +30,7 @@ const FilterBar = ({ posts, setFilteredPosts, setCurrentPage }) => {
     setSearchHelperText('')
 
     const filterByState = () => {
+      setIsLoaded(true)
       let result = posts;
       if (stateSelect !== "ALL") {
         result = posts.filter(post => (
@@ -73,7 +74,9 @@ const FilterBar = ({ posts, setFilteredPosts, setCurrentPage }) => {
       }
       return setFilteredPosts(result)
     }
-    filterByState()
+    setFilteredPosts([])
+    setIsLoaded(false)
+    setTimeout(filterByState, 500)
     setCurrentPage(1)
   }
 
