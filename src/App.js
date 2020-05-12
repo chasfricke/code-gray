@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled, { createGlobalStyle } from 'styled-components'
+import Paper from '@material-ui/core/Paper';
 import NavBar from './components/NavBar';
 import PostsTable from './components/PostsTable'
 import GenreSelect from './components/inputs/GenreSelect'
@@ -34,15 +35,27 @@ const Content = styled.div`
 `
 
 const FilterContainer = styled.div`
-display: flex;
-flex-direction: row;
-justify-content: space-around;
-background: #dadada;
-width: 100%;
-max-width: 800px;
-padding: 16px;
-margin: 100px 0 16px 0;
-border-radius: 4px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 16px;
+  background-color: white;
+  position: fixed;
+  top: 100px;
+  width: 100%;
+`
+
+const FilterContent = styled(Paper)`
+  && {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background: #dadada;
+    width: 100%;
+    max-width: 800px;
+    padding: 16px;
+    border-radius: 4px;
+  }
 `
 
 const App = () => {
@@ -158,14 +171,16 @@ const App = () => {
       <NavBar />
       <Content>
         <FilterContainer>
-          <TextField
-            label="Search"
-            onChange={e => setSearch(e.target.value)}
-            onKeyDown={handleKeyDown}
-          />
-          <GenreSelect value={genreSelect} onChange={e => setGenreSelect(e.target.value)} data={posts} />
-          <StateSelect value={stateSelect} onChange={e => setStateSelect(e.target.value)} data={posts} />
-          <Button onClick={() => { filteredSearch() }}>Search</Button>
+          <FilterContent>
+            <TextField
+              label="Search"
+              onChange={e => setSearch(e.target.value)}
+              onKeyDown={handleKeyDown}
+            />
+            <GenreSelect value={genreSelect} onChange={e => setGenreSelect(e.target.value)} data={posts} />
+            <StateSelect value={stateSelect} onChange={e => setStateSelect(e.target.value)} data={posts} />
+            <Button onClick={() => { filteredSearch() }}>Search</Button>
+          </FilterContent>
         </FilterContainer>
         {isLoaded ? <PostsTable data={currentPosts} searchHelperText={searchHelperText} /> : <div>Searching for results...</div>}
         <Pagination

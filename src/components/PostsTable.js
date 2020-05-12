@@ -3,6 +3,10 @@ import styled from 'styled-components';
 import CallIcon from '@material-ui/icons/Call';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 
+const TopMargin = styled.div`
+  margin-top: 200px;
+`
+
 const StyledTD = styled.td`
   width: 325px;
   padding: 16px 0 16px 0;
@@ -29,6 +33,7 @@ const IconRow = styled.div`
 const StyledUL = styled.ul`
   list-style: none;
   color: rgba(0,0,0,0.87);
+  padding-inline-start: 0;
   li {
     margin: 2px 0;
   }
@@ -48,10 +53,11 @@ const ResultsTable = (props) => {
   }
 
   if (props.searchHelperText) {
-    return <p>{props.searchHelperText}</p>
+
+    return <TopMargin><p>{props.searchHelperText}</p></TopMargin>
   } else
     return (
-      <>
+      <TopMargin>
         <table>
           <tbody>
             {props.data.map(item => (
@@ -67,7 +73,7 @@ const ResultsTable = (props) => {
             ))}
           </tbody>
         </table>
-      </>
+      </TopMargin>
     );
 }
 

@@ -3,7 +3,6 @@ import { AppBar } from '@material-ui/core';
 import styled from 'styled-components';
 import AvatarIcon from './AvatarIcon';
 
-
 const Content = styled.div`
 display: flex;
 flex-direction: row;
