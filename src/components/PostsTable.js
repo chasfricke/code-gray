@@ -15,8 +15,6 @@ const ResultsTable = (props) => {
 
   if (props.searchHelperText) {
     return <p>{props.searchHelperText}</p>
-  } else if (props.data.length === 0) {
-    return <p>No restaurants {props.state ? `in ${props.state}` : ""} match your search criteria.  Please expand your search and try again.</p>
   } else
     return (
       <>
