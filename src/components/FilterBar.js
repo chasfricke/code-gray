@@ -74,9 +74,8 @@ const FilterBar = ({ posts, setFilteredPosts, setCurrentPage, setIsLoaded }) => 
       }
       return setFilteredPosts(result)
     }
-    setFilteredPosts([])
     setIsLoaded(false)
-    setTimeout(filterByState, 500)
+    setTimeout(filterByState, 300)
     setCurrentPage(1)
   }
 

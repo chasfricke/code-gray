@@ -95,6 +95,7 @@ const App = () => {
           totalPosts={filteredPosts.length}
           paginate={paginate}
           currentPage={currentPage}
+          isLoaded={isLoaded}
         />
         {error && <div>{error}</div>}
       </Content>

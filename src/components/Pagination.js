@@ -36,27 +36,32 @@ const selectedCSS = css`
   color: white;
 `
 
-const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage }) => {
+const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage, isLoaded }) => {
   const pageNumbers = [];
   for (let i = 1; i <= (Math.ceil(totalPosts / postsPerPage)); i++) {
     pageNumbers.push(i);
   }
-  return (
-    <StyledUl>
-      {pageNumbers.map(number => (
-        <PageButton key={number} >
-          <StyledAnchor
-            onClick={() => paginate(number)}
-            href="!#"
-            addCSS={number === currentPage && selectedCSS}
-          >
-            {number}
-          </StyledAnchor>
-        </PageButton>
-      )
-      )}
-    </StyledUl >
-  )
+  if (!isLoaded) {
+    return null
+  } else
+    return (
+      <StyledUl>
+        {
+          pageNumbers.map(number => (
+            <PageButton key={number} >
+              <StyledAnchor
+                onClick={() => paginate(number)}
+                href="!#"
+                addCSS={number === currentPage && selectedCSS}
+              >
+                {number}
+              </StyledAnchor>
+            </PageButton>
+          )
+          )
+        }
+      </StyledUl>
+    )
 }
 
 export default Pagination;
