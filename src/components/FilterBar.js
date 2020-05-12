@@ -5,6 +5,7 @@ import StateSelect from './inputs/StateSelect'
 import TextField from './inputs/TextField'
 import Button from './inputs/Button'
 import Paper from '@material-ui/core/Paper';
+import ResultsCount from './ResultsCount';
 
 const FilterContainer = styled(Paper)`
   && {
@@ -20,7 +21,7 @@ const FilterContainer = styled(Paper)`
   }
 `
 
-const FilterBar = ({ posts, setFilteredPosts, setCurrentPage, setIsLoaded }) => {
+const FilterBar = ({ posts, setFilteredPosts, setCurrentPage, setIsLoaded, indexOfFirstPost, indexOfLastPost, total, isLoaded }) => {
   const [stateSelect, setStateSelect] = useState('ALL');
   const [genreSelect, setGenreSelect] = useState('ALL');
   const [searchHelperText, setSearchHelperText] = useState('')
@@ -96,7 +97,7 @@ const FilterBar = ({ posts, setFilteredPosts, setCurrentPage, setIsLoaded }) => 
         <StateSelect value={stateSelect} onChange={e => setStateSelect(e.target.value)} data={posts} />
         <Button onClick={() => { filteredSearch() }}>Search</Button>
       </FilterContainer>
-      <p>{searchHelperText}</p>
+      <p>{isLoaded && (searchHelperText ? searchHelperText : <ResultsCount indexOfFirstPost={indexOfFirstPost} indexOfLastPost={indexOfLastPost} total={total} />)}</p>
     </>
   )
 }
