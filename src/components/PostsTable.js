@@ -25,7 +25,7 @@ const UL = styled.ul`
   list-style: none;
   color: rgba(0,0,0,0.87);
   padding-inline-start: 0;
-  margin: -3px 0 16px 0;
+  margin: -3px 0 0 0;
   li {
     margin: 3px 0;
   }
@@ -33,7 +33,7 @@ const UL = styled.ul`
 
 const TD = styled.td`
   width: auto;
-  padding: 16px 24px 24px 6px;
+  padding: 16px 24px 16px 6px;
   vertical-align: top;
   max-width: 250px;
   min-width: 150px;
@@ -51,6 +51,13 @@ const TH = styled.th`
 
 const TR = styled.tr`
   min-height: 150px;
+`
+
+const HR = styled.hr`
+  border: 0;
+  height: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 `
 
 const Table = styled.table`
@@ -80,15 +87,22 @@ const ResultsTable = ({ currentPosts }) => {
       </thead>
       <tbody>
         {currentPosts.map(item => (
-          <TR key={item.id}>
-            <TD>
-              <NameText>{item.name}</NameText>
-              <IconRow><CallIcon fontSize="small" /><a href="tel:{item.telephone}">{item.telephone}</a></IconRow>
-              <IconRow><LocationOnIcon fontSize="small" /><p>{item.city}, {item.state}</p></IconRow>
-            </TD>
-            <TD>{getGenreList(item.genre)}</TD>
-            <TD>{item.attire.charAt(0).toUpperCase() + item.attire.slice(1)}</TD>
-          </TR>
+          <>
+            <TR key={item.id}>
+              <TD>
+                <NameText>{item.name}</NameText>
+                <IconRow><CallIcon fontSize="small" /><a href="tel:{item.telephone}">{item.telephone}</a></IconRow>
+                <IconRow><LocationOnIcon fontSize="small" /><p>{item.city}, {item.state}</p></IconRow>
+              </TD>
+              <TD>{getGenreList(item.genre)}</TD>
+              <TD>{item.attire.charAt(0).toUpperCase() + item.attire.slice(1)}</TD>
+            </TR>
+            <tr>
+              <td colspan={3}>
+                <HR />
+              </td>
+            </tr>
+          </>
         ))}
       </tbody >
     </Table >
