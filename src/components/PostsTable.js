@@ -3,10 +3,6 @@ import styled from 'styled-components';
 import CallIcon from '@material-ui/icons/Call';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 
-const TopMargin = styled.div`
-  margin-top: 200px;
-`
-
 const StyledTD = styled.td`
   width: 325px;
   padding: 16px 0 16px 0;
@@ -40,7 +36,6 @@ const StyledUL = styled.ul`
 `
 
 const ResultsTable = (props) => {
-
   const getGenreList = (genreStr) => {
     const genreArr = genreStr.split(',')
     return (
@@ -52,29 +47,23 @@ const ResultsTable = (props) => {
     )
   }
 
-  if (props.searchHelperText) {
+  return (
+    <table>
+      <tbody>
+        {props.data.map(item => (
+          <tr key={item.id}>
+            <StyledTD>
+              <NameText>{item.name}</NameText>
+              <IconRow><CallIcon fontSize="small" /><a href="tel:{item.telephone}">{item.telephone}</a></IconRow>
+              <IconRow><LocationOnIcon fontSize="small" /><p>{item.city}, {item.state}</p></IconRow>
+            </StyledTD>
 
-    return <TopMargin><p>{props.searchHelperText}</p></TopMargin>
-  } else
-    return (
-      <TopMargin>
-        <table>
-          <tbody>
-            {props.data.map(item => (
-              <tr key={item.id}>
-                <StyledTD>
-                  <NameText>{item.name}</NameText>
-                  <IconRow><CallIcon fontSize="small" /><a href="tel:{item.telephone}">{item.telephone}</a></IconRow>
-                  <IconRow><LocationOnIcon fontSize="small" /><p>{item.city}, {item.state}</p></IconRow>
-                </StyledTD>
-
-                <td>{getGenreList(item.genre)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </TopMargin>
-    );
+            <td>{getGenreList(item.genre)}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
 }
 
 export default ResultsTable;
