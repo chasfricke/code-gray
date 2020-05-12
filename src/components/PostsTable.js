@@ -4,17 +4,16 @@ import CallIcon from '@material-ui/icons/Call';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 
 const StyledTD = styled.td`
-  width: 275px;
-  padding: 16px;
-  
+  width: 325px;
+  padding: 16px 0 16px 0;
 `
 
-const Name = styled.h3`
-  font-size: 28px;
+const NameText = styled.h3`
+  font-size: 26px;
   font-weight: bold;
-  margin: 0;
+  margin: 0 0 3px 0;
   font-style: italic;
-  color: rgba(0,0,0,0.76);
+  color: rgba(0,0,0,0.82);
 `
 
 const IconRow = styled.div`
@@ -23,7 +22,7 @@ const IconRow = styled.div`
   align-items: center;
   color: rgba(0,0,0,0.87);
   p, a {
-    margin: 6px 0 6px 6px;
+    margin: 5px 0 5px 6px;
   }
 `
 
@@ -58,9 +57,9 @@ const ResultsTable = (props) => {
             {props.data.map(item => (
               <tr key={item.id}>
                 <StyledTD>
-                  <Name>{item.name}</Name>
-                  <IconRow><CallIcon /><a href="tel:{item.telephone}">{item.telephone}</a></IconRow>
-                  <IconRow><LocationOnIcon /><p>{item.city}, {item.state}</p></IconRow>
+                  <NameText>{item.name}</NameText>
+                  <IconRow><CallIcon fontSize="small" /><a href="tel:{item.telephone}">{item.telephone}</a></IconRow>
+                  <IconRow><LocationOnIcon fontSize="small" /><p>{item.city}, {item.state}</p></IconRow>
                 </StyledTD>
 
                 <td>{getGenreList(item.genre)}</td>
