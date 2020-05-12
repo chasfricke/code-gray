@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled, { createGlobalStyle } from 'styled-components'
+import CircularProgress from '@material-ui/core/CircularProgress';
 import NavBar from './components/NavBar';
 import PostsTable from './components/PostsTable'
 import Pagination from './components/Pagination'
@@ -89,7 +90,7 @@ const App = () => {
       <Content>
 
         <FilterBar posts={posts} setFilteredPosts={setFilteredPosts} setCurrentPage={setCurrentPage} setIsLoaded={setIsLoaded} />
-        {isLoaded ? <PostsTable currentPosts={currentPosts} /> : <div>Searching...</div>}
+        {isLoaded ? <PostsTable currentPosts={currentPosts} /> : <CircularProgress />}
         <Pagination
           postsPerPage={postsPerPage}
           totalPosts={filteredPosts.length}
