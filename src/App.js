@@ -96,58 +96,10 @@ const App = () => {
     }
   }
 
-  // const filteredSearch = () => {
-  //   setSearchHelperText('')
-
-  //   const stateFilterResults = posts.filter(post => {
-  //     return post.state.toLowerCase().includes(stateSelect.toLowerCase())
-  //   })
-
-  //   if (stateFilterResults.length === 0) {
-  //     setSearchHelperText(`We're sorry.  We don't have any restaurants listed in ${stateSelect} at this time.`)
-  //   }
-
-  //   const searchBarCondition = (post) => (
-  //     post.name.toLowerCase().includes(search.toLowerCase()) ||
-  //     post.city.toLowerCase().includes(search.toLowerCase()) ||
-  //     post.genre.toLowerCase().includes(search.toLowerCase())
-  //   )
-
-  //   const stateSelectCondition = (post) => (
-  //     post.state.toLowerCase().includes(stateSelect.toLowerCase())
-  //   )
-
-  //   // To Do: Ignore 'ALL' value when selected 
-  //   // const stateSelectCondition = (post) => {
-  //   //   if (stateSelect === "ALL") {
-  //   //     return true
-  //   //   } else {
-  //   //     return post.state.toLowerCase().includes(stateSelect.toLowerCase())
-  //   //   }
-  //   // }
-
-  //   const genreSelectCondition = (post) => (
-  //     post.genre.toLowerCase().includes(genreSelect.toLowerCase())
-  //   )
-
-  //   setFilteredPosts(posts.filter(post => {
-  //     return (
-  //       //Text Input
-  //       searchBarCondition(post) &&
-  //       //State Select 
-  //       stateSelectCondition(post) &&
-  //       //Genre Select
-  //       genreSelectCondition(post)
-  //     )
-  //   }))
-  //   setCurrentPage(1)
-  // }
-
   const filteredSearch = () => {
     setSearchHelperText('')
 
     const filterByState = () => {
-      console.log("filterByState")
       let result = posts;
       if (stateSelect !== "ALL") {
         result = posts.filter(post => (
@@ -162,7 +114,6 @@ const App = () => {
     }
 
     const filterByGenre = (stateData) => {
-      console.log("filterByGenre")
       let result = stateData;
       if (genreSelect !== "ALL") {
         result = stateData.filter(post => (
@@ -177,7 +128,6 @@ const App = () => {
     }
 
     const filterBySearchBar = (genreData) => {
-      console.log("filterBySearchBar")
       const result = genreData.filter(post => (
         post.name.toLowerCase().includes(search.toLowerCase()) ||
         post.city.toLowerCase().includes(search.toLowerCase()) ||
