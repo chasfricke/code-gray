@@ -21,7 +21,7 @@ const IconRow = styled.div`
   }
 `
 
-const StyledUL = styled.ul`
+const UL = styled.ul`
   list-style: none;
   color: rgba(0,0,0,0.87);
   padding-inline-start: 0;
@@ -31,54 +31,63 @@ const StyledUL = styled.ul`
   }
 `
 
-const StyledTD = styled.td`
-  width: 250px;
-  padding: 16px 0 16px 0;
+const TD = styled.td`
+  width: auto;
+  padding: 16px 25px 16px 4px;
   vertical-align: top;
+  max-width: 300px;
 `
 
-const StyledTd = styled.td`
-    padding:  18px;
-    // background-color: blue;
-    min-width: 100px;
-    vertical-align: top;
+const TH = styled.th`
+  text-align: left;
+  font-size: 16px;
+  font-weight: medium;
+  color: white;
+  background-color: #dadada;
+  padding: 4px;
+`
+
+const Container = styled.div`
+  margin-top: 24px;
 `
 
 const ResultsTable = ({ currentPosts }) => {
   const getGenreList = (genreStr) => {
     const genreArr = genreStr.split(',')
     return (
-      <StyledUL>
+      <UL>
         {(genreArr.sort()).map(genre => (
           <li key={genre}>{genre}</li>
         ))}
-      </StyledUL>
+      </UL>
     )
   }
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>General Info</th>
-          <th>Genre</th>
-          <th>Attire</th>
-        </tr>
-      </thead>
-      <tbody>
-        {currentPosts.map(item => (
-          <tr key={item.id}>
-            <StyledTD>
-              <NameText>{item.name}</NameText>
-              <IconRow><CallIcon fontSize="small" /><a href="tel:{item.telephone}">{item.telephone}</a></IconRow>
-              <IconRow><LocationOnIcon fontSize="small" /><p>{item.city}, {item.state}</p></IconRow>
-            </StyledTD>
-            <StyledTd>{getGenreList(item.genre)}</StyledTd>
-            <StyledTd>{item.attire.charAt(0).toUpperCase() + item.attire.slice(1)}</StyledTd>
+    <Container>
+      <table>
+        <thead>
+          <tr>
+            <TH>General Info</TH>
+            <TH>Genre</TH>
+            <TH>Attire</TH>
           </tr>
-        ))}
-      </tbody >
-    </table >
+        </thead>
+        <tbody>
+          {currentPosts.map(item => (
+            <tr key={item.id}>
+              <TD>
+                <NameText>{item.name}</NameText>
+                <IconRow><CallIcon fontSize="small" /><a href="tel:{item.telephone}">{item.telephone}</a></IconRow>
+                <IconRow><LocationOnIcon fontSize="small" /><p>{item.city}, {item.state}</p></IconRow>
+              </TD>
+              <TD>{getGenreList(item.genre)}</TD>
+              <TD>{item.attire.charAt(0).toUpperCase() + item.attire.slice(1)}</TD>
+            </tr>
+          ))}
+        </tbody >
+      </table >
+    </Container>
   );
 }
 
