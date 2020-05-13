@@ -39,7 +39,7 @@ const TR = styled.tr`
 const HR = styled.hr`
   border: 0;
   height: 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 2px solid rgba(0, 0, 0, 0.1);
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 `
 const UL = styled.ul`
@@ -78,6 +78,7 @@ const ButtonWrapper = styled.div`
 
 const MoreInfoWrapper = styled.div`
   max-width: 500px;
+  padding-left: 4px;
 `
 
 const TableRow = ({ item }) => {
@@ -115,9 +116,7 @@ const TableRow = ({ item }) => {
                 {toggle ? <ExpandLessIcon /> : <ExpandMoreIcon />}
               </Button>
             </ButtonWrapper>
-
           </RightColumn>
-
         </TD>
       </TR>
       {toggle &&
@@ -129,9 +128,7 @@ const TableRow = ({ item }) => {
               <p>{item.hours}</p>
               <p><b>Tags:</b></p>
               <p>{item.tags}</p>
-
             </MoreInfoWrapper>
-
           </td>
         </tr>
       }
