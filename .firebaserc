@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "code-gray",
+    "production": "code-gray"
+  }
+}
