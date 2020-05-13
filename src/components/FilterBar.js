@@ -15,7 +15,7 @@ const FilterContainer = styled(Paper)`
     justify-content: space-around;
     background: #dadada;
     width: 100%;
-    max-width: 800px;
+    max-width: 900px;
     padding: 16px;
     border-radius: 4px;
     margin-top: 100px;
