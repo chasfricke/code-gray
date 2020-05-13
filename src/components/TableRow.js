@@ -127,7 +127,7 @@ const TableRow = ({ item }) => {
               <p><b>Hours:</b></p>
               <p>{item.hours}</p>
               <p><b>Tags:</b></p>
-              <p>{item.tags}</p>
+              <p>{item.tags.replace(/,/g, ", ")}</p>
             </MoreInfoWrapper>
           </td>
         </tr>
