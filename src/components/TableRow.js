@@ -99,6 +99,10 @@ const TableRow = ({ item }) => {
     return setToggle(!toggle)
   }
 
+  const styleHours = (hours) => {
+    return hours.split(";").map(x => <p key={x}>{x}</p>)
+  }
+
   return (
     <>
       <TR key={item.id}>
@@ -125,7 +129,7 @@ const TableRow = ({ item }) => {
             <MoreInfoWrapper>
               <a href={item.website}>{item.website}</a>
               <p><b>Hours:</b></p>
-              <p>{item.hours}</p>
+              {styleHours(item.hours)}
               <p><b>Tags:</b></p>
               <p>{item.tags.replace(/,/g, ", ")}</p>
             </MoreInfoWrapper>
