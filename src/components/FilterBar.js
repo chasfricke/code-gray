@@ -29,6 +29,7 @@ const FilterBar = ({ posts, setFilteredPosts, setCurrentPage, setIsLoaded, index
   const [searchHelperText, setSearchHelperText] = useState('')
   const [search, setSearch] = useState('');
 
+  //Filter Logic
   const filteredSearch = () => {
     setSearchHelperText('')
 
@@ -75,7 +76,7 @@ const FilterBar = ({ posts, setFilteredPosts, setCurrentPage, setIsLoaded, index
         filterBySearchBar(result)
       } else {
         return (
-          setSearchHelperText(`${stateSelect} has no restaurant listings with the genre "${genreSelect}" and "${attireSelect}" attire.`)
+          setSearchHelperText('No matching results. Please broaden your search.')
           , setFilteredPosts([])
         )
       }
@@ -88,7 +89,7 @@ const FilterBar = ({ posts, setFilteredPosts, setCurrentPage, setIsLoaded, index
         post.genre.toLowerCase().includes(search.toLowerCase())
       ))
       if (result.length === 0) {
-        return (setSearchHelperText(`No restaurant listings ${stateSelect && `in ${stateSelect}`} include "${search}".  Please broaden your search.`),
+        return (setSearchHelperText('No matching results. Please broaden your search.'),
           setFilteredPosts([])
         )
       }

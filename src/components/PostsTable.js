@@ -16,22 +16,25 @@ const Table = styled.table`
 `
 
 const PostsTable = ({ currentPosts }) => {
-  return (
-    <Table>
-      <thead>
-        <tr>
-          <TH>General Info</TH>
-          <TH>Genre</TH>
-          <TH>Attire</TH>
-        </tr>
-      </thead>
-      <tbody>
-        {currentPosts.map(item => (
-          <TableRow item={item} key={item.id} />
-        ))}
-      </tbody >
-    </Table >
-  );
+  if (currentPosts.length > 0) {
+    return (
+      <Table>
+        <thead>
+          <tr>
+            <TH>General Info</TH>
+            <TH>Genre</TH>
+            <TH>Attire</TH>
+          </tr>
+        </thead>
+        <tbody>
+          {currentPosts.map(item => (
+            <TableRow item={item} key={item.id} />
+          ))}
+        </tbody >
+      </Table >
+    );
+
+  } else return null
 }
 
 export default PostsTable;
